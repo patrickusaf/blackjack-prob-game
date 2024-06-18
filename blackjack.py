@@ -128,3 +128,52 @@ elif 21 - total(dealerHand) < 21 - total(playerHand):
 elif 21 - total(dealerHand) > 21 - total(playerHand):
     print(f"You have {playerHand} for a total of {total(playerHand)} and the dealer has {dealerHand} for a total of {total(dealerHand)}")
     print("You win!")
+
+
+def blackjack_hand_greater_than(hand_1, hand_2):
+    """
+    Return True if hand_1 beats hand_2, and False otherwise.
+    
+    In order for hand_1 to beat hand_2 the following must be true:
+    - The total of hand_1 must not exceed 21
+    - The total of hand_1 must exceed the total of hand_2 OR hand_2's total must exceed 21
+    
+    Hands are represented as a list of cards. Each card is represented by a string.
+    
+    When adding up a hand's total, cards with numbers count for that many points. Face
+    cards ('J', 'Q', and 'K') are worth 10 points. 'A' can count for 1 or 11.
+    
+    When determining a hand's total, you should try to count aces in the way that 
+    maximizes the hand's total without going over 21. e.g. the total of ['A', 'A', '9'] is 21,
+    the total of ['A', 'A', '9', '3'] is 14.
+    
+    Examples:
+    >>> blackjack_hand_greater_than(['K'], ['3', '4'])
+    True
+    >>> blackjack_hand_greater_than(['K'], ['10'])
+    False
+    >>> blackjack_hand_greater_than(['K', 'K', '2'], ['3'])
+    False
+    """
+    hand1_points = count_points(hand_1)
+    hand2_points = count_points(hand_2)
+    
+    print(hand1_points)
+    print(hand2_points)
+
+    return hand1_points <= 21 and (hand1_points > hand2_points or hand2_points > 21)
+
+def count_points(hand):
+    total = 0
+    aces = 0
+    for card in hand:
+        if card in ["J", "Q", "K"]:
+            total += 10
+        elif card == "A":
+            total += 11
+            aces += 1
+        else:
+            total += int(card)
+    if (total > 21 and aces > 0):
+        total = total - (10*aces)
+    return total
