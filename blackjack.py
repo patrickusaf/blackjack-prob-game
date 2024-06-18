@@ -77,15 +77,14 @@ def checkForProbs(dealerHand, playerHand):
         print("You have an Ace!")
     else:
         pc1 = probTable["PC1"]
-        if total(playerHand) >= 5 and total(playerHand) <= 17:
+        #if total(playerHand) >= 5 and total(playerHand) <= 17:
             #action = probTable[pc1['7']]['5']
-            print(f"You should {action}")
+            #print(f"You should {action}")
             #print(total(playerHand), dealerHand[0])
 
 # game loop
 for _ in range(2):
     dealCard(dealerHand)
-
     dealCard(playerHand)
 
 while playerIn or dealerIn:
